@@ -10,6 +10,8 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'sjl/badwolf'
 Plugin 'vim-scripts/IndexedSearch.git'
 
+Plugin 'austintaylor/vim-commaobject'
+
 " Nerd tree {
     Plugin 'scrooloose/nerdtree'
     Plugin 'Xuyuanp/nerdtree-git-plugin'
