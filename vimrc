@@ -53,7 +53,6 @@ Plugin 'StanAngeloff/php.vim', { 'for': 'php' }
 
 
 " Быстрый поиск по файлам {
-    let g:ack_default_options = " -s -H --nocolor --nogroup --column --ignore-dir=tests/vendor --ignore-dir=extra/vendor --ignore-dir=cache --php"
     Plugin 'mileszs/ack.vim'
 " }
 
