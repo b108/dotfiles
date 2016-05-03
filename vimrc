@@ -27,7 +27,12 @@ Plugin 'bling/vim-bufferline'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'jeetsukumaran/vim-buffergator'
+
+" buffergator {{{
+    let g:buffergator_suppress_keymaps=1
+    Plugin 'jeetsukumaran/vim-buffergator'
+" }}}
+
 "Plugin 'vim-scripts/grep.vim'
 Plugin 'adoy/vim-php-refactoring-toolbox'
 Plugin 'shawncplus/phpcomplete.vim'
