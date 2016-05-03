@@ -36,8 +36,8 @@ Plugin 'tpope/vim-endwise'
 Plugin 'SirVer/ultisnips'
 
 " Emmet plugin {
-    let g:user_emmet_leader_key='<C-M>'
-    let g:user_emmet_mode='a'    "enable all function in all mode.
+    "let g:user_emmet_leader_key='<C-M>'
+    "let g:user_emmet_mode='a'    "enable all function in all mode.
     Plugin 'mattn/emmet-vim'
 " }
 
@@ -74,7 +74,16 @@ set number
 set sidescroll=5
 set bs=2
 set showmatch matchtime=3
+
+" Search {{{
 set hlsearch
+
+set incsearch  " start search before pressed Enter
+set ignorecase " ignore case when searching
+set smartcase  " no ignorecase if Uppercase char present
+
+" }}}
+
 
 " Clear a search by typing ,<space>
 nnoremap <leader><space> :noh<cr>
@@ -86,9 +95,6 @@ nnoremap <leader><space> :noh<cr>
 " % : saves and restores the buffer list
 " n... : where to save the viminfo files
 set viminfo='10,\"100,:100,n~/.viminfo
-
-set ignorecase " ignore case when searching
-set smartcase " no ignorecase if Uppercase char present
 
 let xml_tag_completion_map = ">>"
 
@@ -452,9 +458,6 @@ nnoremap <C-l> <C-w>l
 
 nnoremap <silent> ,a :NERDTreeToggle<CR>
 
-"start search before pressed Enter
-set incsearch
-
 if has('path_extra')
     setglobal tags-=./tags tags-=./tags; tags^=./tags;
 endif
@@ -495,8 +498,7 @@ function! PHPFold(lnum)
 endfunction
 
 " Сокращения внутри phpunit-файлов {
-autocmd BufNewFile,BufRead *Test.php abbreviate <buffer> atrue $this->assertTrue(
-autocmd BufNewFile,BufRead *Test.php abbreviate <buffer> aeq $this->assertEquals(
+autocmd BufNewFile,BufRead *Test.php set ft=php.phpunit
 " }
 
 source ~/.vimrc.local
