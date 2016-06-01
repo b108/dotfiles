@@ -1,70 +1,75 @@
-"Vundle require
 set nocompatible
-filetype off
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
 
-Plugin 'gmarik/Vundle.vim'
+call plug#begin('~/.vim/plugged')
 
-Plugin 'sjl/badwolf'
-Plugin 'vim-scripts/IndexedSearch.git'
+Plug 'sjl/badwolf'
+Plug 'vim-scripts/IndexedSearch'
 
-Plugin 'austintaylor/vim-commaobject'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
+Plug 'austintaylor/vim-commaobject'
 
 " Nerd tree {
-    Plugin 'scrooloose/nerdtree'
-    Plugin 'Xuyuanp/nerdtree-git-plugin'
+    Plug 'scrooloose/nerdtree'
+    Plug 'Xuyuanp/nerdtree-git-plugin'
 " }
 
-" Plugin 'kristijanhusak/vim-multiple-cursors'
+" Plug 'kristijanhusak/vim-multiple-cursors'
 
-Plugin 'evidens/vim-twig'
-Plugin 'valloric/MatchTagAlways'
+Plug 'evidens/vim-twig'
+Plug 'valloric/MatchTagAlways'
 
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'bling/vim-bufferline'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-repeat'
-Plugin 'ctrlpvim/ctrlp.vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'bling/vim-bufferline'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'ctrlpvim/ctrlp.vim'
+
+Plug 'scrooloose/syntastic'
+
+Plug 'joonty/vdebug'
+
+Plug 'benmills/vimux'
 
 " buffergator {{{
     let g:buffergator_suppress_keymaps=1
-    Plugin 'jeetsukumaran/vim-buffergator'
+    Plug 'jeetsukumaran/vim-buffergator'
 " }}}
 
-"Plugin 'vim-scripts/grep.vim'
-Plugin 'adoy/vim-php-refactoring-toolbox'
-Plugin 'shawncplus/phpcomplete.vim'
-Plugin 'Shougo/neocomplete.vim'
-Plugin 'tpope/vim-endwise'
-Plugin 'SirVer/ultisnips'
+"Plug 'vim-scripts/grep.vim'
+Plug 'adoy/vim-php-refactoring-toolbox'
+Plug 'shawncplus/phpcomplete.vim'
+Plug 'Shougo/neocomplete.vim'
+Plug 'tpope/vim-endwise'
+Plug 'SirVer/ultisnips'
+Plug 'arnaud-lb/vim-php-namespace'
 
-" Emmet plugin {
+" Emmet Plug {
     "let g:user_emmet_leader_key='<C-M>'
     "let g:user_emmet_mode='a'    "enable all function in all mode.
-    Plugin 'mattn/emmet-vim'
+    "Plug 'mattn/emmet-vim'
 " }
 
-Plugin 'StanAngeloff/php.vim', { 'for': 'php' }
+Plug 'StanAngeloff/php.vim', { 'for': 'php' }
 
 "Tagbar plugin {
     map \t :TagbarToggle<CR>
     let g:tagbar_left = 1
     let g:tagbar_compact = 1
-    Plugin 'majutsushi/tagbar'
+    Plug 'majutsushi/tagbar'
 " }
 
 
 
 " Быстрый поиск по файлам {
-    Plugin 'mileszs/ack.vim'
+    Plug 'mileszs/ack.vim'
 " }
 
-Plugin 'vim-scripts/Git-Branch-Info'
-Plugin 'tpope/vim-fugitive'
+Plug 'vim-scripts/Git-Branch-Info'
+Plug 'tpope/vim-fugitive'
 
-call vundle#end()
+call plug#end()
 
 " включить загрузку плагинов по типам файлов
 filetype plugin on
@@ -192,18 +197,6 @@ nmap <Space> <PageDown>
 vmap < <gv
 vmap > >gv
 
-" Àâòîçàâåðøåíèå ñëîâ ïî tab =)
-function InsertTabWrapper()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<tab>"
-    else
-        return "\<c-p>"
-    endif
-endfunction
-
-"imap <tab> <c-r>=InsertTabWrapper()<cr>
-
 set complete=""
 set complete+=.
 set complete+=k
@@ -256,7 +249,7 @@ au FileType make exe Makefile()
 syntax on
 highlight Folded ctermbg=4 ctermfg=8 term=bold
 
-nnoremap <F4> :buffers<CR>:buffer<SPACE>
+nnoremap <silent> <F4> :CtrlPBuffer<CR>
 nnoremap <F5> :bp<CR>
 nnoremap <F6> :bn<CR>
 
@@ -333,8 +326,6 @@ if !exists('*PHPsynCHK')
 endif
 
 set errorformat=%m\ in\ %f\ on\ line\ %l
-
-"inoremap jj <Esc>
 
 if has("autocmd")
     autocmd BufRead *.sql set filetype=mysql      
@@ -505,5 +496,7 @@ endfunction
 " Сокращения внутри phpunit-файлов {
 autocmd BufNewFile,BufRead *Test.php set ft=php.phpunit
 " }
+
+let g:syntastic_php_checkers = ['php', 'phpmd']
 
 source ~/.vimrc.local
