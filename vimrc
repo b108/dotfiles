@@ -26,6 +26,8 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'ctrlpvim/ctrlp.vim'
 
+Plug 'dyng/ctrlsf.vim'
+
 Plug 'scrooloose/syntastic'
 
 Plug 'joonty/vdebug'
@@ -498,5 +500,7 @@ autocmd BufNewFile,BufRead *Test.php set ft=php.phpunit
 " }
 
 let g:syntastic_php_checkers = ['php', 'phpmd']
+
+nnoremap ,f "gyiw:Ag<Space>\b<C-R>g\b<CR>
 
 source ~/.vimrc.local
