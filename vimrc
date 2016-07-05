@@ -34,6 +34,8 @@ Plug 'joonty/vdebug'
 
 Plug 'benmills/vimux'
 
+Plug 'joonty/vim-phpunitqf'
+
 " buffergator {{{
     let g:buffergator_suppress_keymaps=1
     Plug 'jeetsukumaran/vim-buffergator'
@@ -45,7 +47,10 @@ Plug 'shawncplus/phpcomplete.vim'
 Plug 'Shougo/neocomplete.vim'
 Plug 'tpope/vim-endwise'
 Plug 'SirVer/ultisnips'
-Plug 'arnaud-lb/vim-php-namespace'
+
+" Plug 'arnaud-lb/vim-php-namespace'
+
+Plug 'danro/rename.vim'
 
 " Emmet Plug {
     "let g:user_emmet_leader_key='<C-M>'
@@ -118,7 +123,7 @@ set showcmd
 set hidden
 
 "Используется плагин https://github.com/vim-scripts/Git-Branch-Info
-function MyGitBranchInfo()
+function! MyGitBranchInfo()
     let l:branch=GitBranchInfoTokens()[0]
     if l:branch == ""
         return ""
@@ -148,7 +153,7 @@ highlight lCursor ctermfg=NONE ctermbg=Cyan
 
 set visualbell
 
-function MyKeyMapHighlight()
+function! MyKeyMapHighlight()
     if &iminsert == 0
         hi StatusLine ctermfg=White guifg=White
     else
@@ -211,32 +216,32 @@ set completeopt+=longest
 
 nnoremap \w  :w<CR>
 
-function QuickMake()
+function! QuickMake()
     map <C-C> :make<CR><CR><CR>:cw<CR>
 endfun
 
-function Perlfile()
+function! Perlfile()
     set foldmethod=expr
     set foldexpr=getline(v:lnum-1)=~'^\\s*sub\\s\\+\\w\\+\\s*{\\s*$'?'>1':getline(v:lnum+1)=~'^}$'?'s1':'-1'
 endfun
 
 set tabstop=4 shiftwidth=4 smarttab expandtab softtabstop=4
 
-function PythonFile()
+function! PythonFile()
     set autoindent
 endfun
 
-function AdaFile()
+function! AdaFile()
     setlocal autoindent
     map \tio ggOwith Ada.Text_IO; use Ada.Text_IO;<CR><ESC>
     exe QuickMake()
 endfun
 
-function CFile()
+function! CFile()
     exe QuickMake()
 endfun
 
-function Makefile()
+function! Makefile()
     setlocal noexpandtab
 endfun
 
@@ -352,7 +357,7 @@ iabbr functoin function
 "Взято из https://github.com/pepellou/vim-tricks: {{{{
 
 "With this shortcut, you now have the choice to run the command :W (instead of normal :w), which will ask you for your sudoer password and, once entered, will scale the privileges and save the file.
-command W w !sudo tee % > /dev/null
+command! W w !sudo tee % > /dev/null
 
 "But in order to be more efficient, it's very important for me to save my folds whenever I leave a file and restore them when opening it. That's what I get with this:
 au BufWinLeave * silent! mkview
@@ -362,7 +367,7 @@ au BufWinEnter * silent! loadview
 
 nnoremap ,m :MarksBrowser<CR>
 
-function NewJsFile()
+function! NewJsFile()
     let fn=expand("%")
     if match(fn, "\\<models\\|views\\>/") >= 0
         if match(fn, "\\<models\\>/") >= 0
@@ -379,7 +384,7 @@ endfunction
 au BufNewFile *.js call NewJsFile()
 au BufNewFile * set fileencoding=utf-8
 
-function s:Mkdir()
+function! s:Mkdir()
   let dir = expand('%:p:h')
 
   if !isdirectory(dir)
@@ -388,7 +393,7 @@ function s:Mkdir()
   endif
 endfunction
 
-function GoPhpUnitError()
+function! GoPhpUnitError()
     let makeprg=&makeprg
     let errorformat=&errorformat
 
@@ -495,8 +500,9 @@ function! PHPFold(lnum)
   endif
 endfunction
 
-" Сокращения внутри phpunit-файлов {
+" Сокращения внутри phpunit-файлов и файлов интерфейсов {
 autocmd BufNewFile,BufRead *Test.php set ft=php.phpunit
+autocmd BufNewFile,BufRead *Interface.php set ft=php.php_interface
 " }
 
 let g:syntastic_php_checkers = ['php', 'phpmd']
