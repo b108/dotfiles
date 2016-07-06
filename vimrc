@@ -102,6 +102,8 @@ set smartcase  " no ignorecase if Uppercase char present
 " }}}
 
 
+let mapleader = ","
+
 " Clear a search by typing ,<space>
 nnoremap <leader><space> :noh<cr>
 
@@ -475,8 +477,10 @@ set scrolloff=1
 nnoremap <C-c> <C-w>c
 
 set wildignore+=.git
+set wildignore+=cscope.out
+set wildignore+=tags
 
-nnoremap ,v :tabnew ~/.vimrc<CR>
+nnoremap <leader>v :tabnew ~/.vimrc<CR>
 
 autocmd BufNewFile,BufRead *.php setlocal foldmethod=expr foldexpr=PHPFold(v:lnum)
 
