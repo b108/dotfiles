@@ -515,16 +515,6 @@ let g:syntastic_php_checkers = ['php', 'phpmd']
 
 nnoremap <leader>f :execute "Ag " . expand("<cword>")<CR>
 
-" Move lines {{{
-    " Move one line (from https://github.com/miripiruni/vimi/blob/master/.vimrc)
-    nnoremap <C-S-k> ddkP
-    nnoremap <C-S-j> ddp
-    " Move selected lines (from https://github.com/miripiruni/vimi/blob/master/.vimrc)
-    " See http://www.vim.org/scripts/script.php?script_id=1590
-    vnoremap <C-S-k> xkP'[V']
-    vnoremap <C-S-j> xp'[V']
-" }}}
-
 " Search matches are always in center {{{
 " from https://github.com/miripiruni/vimi/blob/master/.vimrc
     nnoremap n nzz
