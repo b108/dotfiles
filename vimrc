@@ -525,6 +525,28 @@ nnoremap <leader>f :execute "Ag " . expand("<cword>")<CR>
     nnoremap g# g#zz
 " }}}
 
+" Go to file of PHP class under cursor {{{
+function! PHPGoFile()
+    let old_iskeyword_option = &iskeyword
+    set iskeyword+=\
+    let className = expand("<cword>")
+    let fileOfClass = substitute(substitute(className, "\\", "/", "g"), "^/", "", "") . '.php'
+    execute "set iskeyword=" . old_iskeyword_option
+
+    let existsBufferNumberOfFile = bufnr(fileOfClass)
+
+    if existsBufferNumberOfFile > 0
+        exe existsBufferNumberOfFile . "buffer"
+    elseif filereadable(fileOfClass)
+        exe "e " . fnameescape(fileOfClass)
+    else
+        exe "normal! gf"
+    endif
+endfunction
+
+autocmd BufNewFile,BufRead *.php nnoremap <buffer> gf :call<Space>PHPGoFile()<CR>
+" }}}
+
 autocmd! bufwritepost .vimrc source $MYVIMRC
 
 source ~/.vimrc.local
