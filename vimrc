@@ -525,4 +525,14 @@ nnoremap <leader>f :execute "Ag " . expand("<cword>")<CR>
     vnoremap <C-S-j> xp'[V']
 " }}}
 
+" Search matches are always in center {{{
+" from https://github.com/miripiruni/vimi/blob/master/.vimrc
+    nnoremap n nzz
+    nnoremap N Nzz
+    nnoremap * *zz
+    nnoremap # #zz
+    nnoremap g* g*zz
+    nnoremap g# g#zz
+" }}}
+
 source ~/.vimrc.local
