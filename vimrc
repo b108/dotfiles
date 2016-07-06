@@ -297,7 +297,7 @@ highlight FileTypeSl ctermbg=Blue
 highlight GitBranchSl ctermbg=Yellow
 
 set encoding=utf8
-set fileencoding=cp1251
+set fileencoding=utf8
 set tenc=utf8
 
 set noswapfile
@@ -534,5 +534,7 @@ nnoremap <leader>f :execute "Ag " . expand("<cword>")<CR>
     nnoremap g* g*zz
     nnoremap g# g#zz
 " }}}
+
+autocmd! bufwritepost .vimrc source $MYVIMRC
 
 source ~/.vimrc.local
