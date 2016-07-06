@@ -511,6 +511,6 @@ autocmd BufNewFile,BufRead *Interface.php set ft=php.php_interface
 
 let g:syntastic_php_checkers = ['php', 'phpmd']
 
-nnoremap ,f "gyiw:Ag<Space>\b<C-R>g\b<CR>
+nnoremap <leader>f :execute "Ag " . expand("<cword>")<CR>
 
 source ~/.vimrc.local
