@@ -17,6 +17,8 @@ Plug 'austintaylor/vim-commaobject'
     Plug 'Xuyuanp/nerdtree-git-plugin'
 
     nnoremap <Bs> :<C-u>NERDTreeToggle<CR>
+
+    let NERDTreeQuitOnOpen=1
 " }}}
 
 " Plug 'kristijanhusak/vim-multiple-cursors'
