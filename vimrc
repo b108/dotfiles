@@ -12,10 +12,12 @@ Plug 'junegunn/fzf.vim'
 
 Plug 'austintaylor/vim-commaobject'
 
-" Nerd tree {
+" NerdTree {{{
     Plug 'scrooloose/nerdtree'
     Plug 'Xuyuanp/nerdtree-git-plugin'
-" }
+
+    nnoremap <Bs> :<C-u>NERDTreeToggle<CR>
+" }}}
 
 " Plug 'kristijanhusak/vim-multiple-cursors'
 
@@ -412,8 +414,6 @@ endfunction
 
 nnoremap <F3> :call GoPhpUnitError()<CR><CR>
 
-nnoremap <leader>a :NERDTreeToggle<CR>
-
 let g:ycm_seed_identifiers_with_syntax = 1
 let g:ycm_collect_identifiers_from_tags_files = 1
 
@@ -462,8 +462,6 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
-
-nnoremap <silent> ,a :NERDTreeToggle<CR>
 
 if has('path_extra')
     setglobal tags-=./tags tags-=./tags; tags^=./tags;
