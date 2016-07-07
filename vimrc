@@ -73,12 +73,6 @@ Plug 'StanAngeloff/php.vim', { 'for': 'php' }
     Plug 'majutsushi/tagbar'
 " }
 
-
-
-" Быстрый поиск по файлам {
-    Plug 'mileszs/ack.vim'
-" }
-
 Plug 'vim-scripts/Git-Branch-Info'
 Plug 'tpope/vim-fugitive'
 
