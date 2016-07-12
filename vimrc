@@ -36,7 +36,7 @@ Plug 'dyng/ctrlsf.vim'
 
 Plug 'scrooloose/syntastic'
 
-Plug 'joonty/vdebug'
+"Plug 'joonty/vdebug'
 
 Plug 'benmills/vimux'
 
@@ -48,11 +48,13 @@ Plug 'joonty/vim-phpunitqf'
 " }}}
 
 "Plug 'vim-scripts/grep.vim'
-Plug 'adoy/vim-php-refactoring-toolbox'
 Plug 'shawncplus/phpcomplete.vim'
 Plug 'Shougo/neocomplete.vim'
 Plug 'tpope/vim-endwise'
 Plug 'SirVer/ultisnips'
+
+"Plug 'adoy/vim-php-refactoring-toolbox'
+Plug 'b108/vim-php-refactoring'
 
 " Plug 'arnaud-lb/vim-php-namespace'
 
