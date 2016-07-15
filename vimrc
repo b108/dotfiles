@@ -235,12 +235,6 @@ function! PythonFile()
     set autoindent
 endfun
 
-function! AdaFile()
-    setlocal autoindent
-    map \tio ggOwith Ada.Text_IO; use Ada.Text_IO;<CR><ESC>
-    exe QuickMake()
-endfun
-
 function! CFile()
     exe QuickMake()
 endfun
@@ -251,7 +245,6 @@ endfun
 
 au Filetype perl exe Perlfile()
 au Filetype python exe PythonFile()
-au Filetype ada exe AdaFile()
 au Filetype c exe CFile()
 au BufNewFile,BufRead *.map         setf map
 
