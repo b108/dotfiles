@@ -224,11 +224,6 @@ function! QuickMake()
     map <C-C> :make<CR><CR><CR>:cw<CR>
 endfun
 
-function! Perlfile()
-    set foldmethod=expr
-    set foldexpr=getline(v:lnum-1)=~'^\\s*sub\\s\\+\\w\\+\\s*{\\s*$'?'>1':getline(v:lnum+1)=~'^}$'?'s1':'-1'
-endfun
-
 set tabstop=4 shiftwidth=4 smarttab expandtab softtabstop=4
 
 function! PythonFile()
@@ -243,7 +238,6 @@ function! Makefile()
     setlocal noexpandtab
 endfun
 
-au Filetype perl exe Perlfile()
 au Filetype python exe PythonFile()
 au Filetype c exe CFile()
 au BufNewFile,BufRead *.map         setf map
