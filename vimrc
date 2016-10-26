@@ -549,4 +549,6 @@ autocmd BufNewFile,BufRead *.php nnoremap <buffer> gf :call<Space>PHPGoFile()<CR
 
 autocmd! bufwritepost .vimrc source $MYVIMRC
 
-source ~/.vimrc.local
+if filereadable(expand("~/.vimrc.local"))
+    source $HOME/.vimrc.local
+endif
