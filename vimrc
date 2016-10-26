@@ -74,7 +74,19 @@ Plug 'danro/rename.vim'
     "Plug 'mattn/emmet-vim'
 " }
 
-Plug 'StanAngeloff/php.vim', { 'for': 'php' }
+" PHP syntax {{{
+    Plug 'StanAngeloff/php.vim', { 'for': 'php' }
+
+    function! PhpSyntaxOverride()
+        hi! def link phpDocTags  phpDefine
+        hi! def link phpDocParam phpType
+    endfunction
+
+    augroup phpSyntaxOverride
+        autocmd!
+        autocmd FileType php call PhpSyntaxOverride()
+    augroup END
+" }}}
 
 "Tagbar plugin {
     map \t :TagbarToggle<CR>
