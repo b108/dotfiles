@@ -111,7 +111,7 @@ set mouse=a
 colorscheme evening
 set number
 set sidescroll=5
-set bs=2
+set backspace=indent,eol,start
 set showmatch matchtime=3
 
 " Search {{{
