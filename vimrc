@@ -12,6 +12,14 @@ Plug 'junegunn/fzf.vim'
 
 Plug 'austintaylor/vim-commaobject'
 
+" Ack {{{
+    if executable('ag')
+        let g:ackprg = 'ag -i'
+    endif
+
+    Plug 'mileszs/ack.vim'
+" }}}
+
 " NerdTree {{{
     Plug 'scrooloose/nerdtree'
     Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -250,9 +258,6 @@ highlight Folded ctermbg=4 ctermfg=8 term=bold
 nnoremap <silent> <F4> :CtrlPBuffer<CR>
 nnoremap <F5> :bp<CR>
 nnoremap <F6> :bn<CR>
-
-"MRU plugin
-nnoremap \\ :MRU<CR>
 
 let g:CodeCompl_Hotkey = '<C-z>'
 
@@ -496,7 +501,7 @@ autocmd BufNewFile,BufRead *Interface.php set ft=php.php_interface
 
 let g:syntastic_php_checkers = ['php', 'phpmd']
 
-nnoremap <leader>f :execute "Ag " . expand("<cword>")<CR>
+nnoremap <leader>f :execute "Ack! " . expand("<cword>")<CR>
 
 " Search matches are always in center {{{
 " from https://github.com/miripiruni/vimi/blob/master/.vimrc
