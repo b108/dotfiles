@@ -481,6 +481,7 @@ nnoremap <C-c> <C-w>c
 set wildignore+=.git
 set wildignore+=cscope.out
 set wildignore+=tags
+set wildignore+=*/vendor/*
 
 nnoremap <leader>v :tabnew ~/.vimrc<CR>
 
