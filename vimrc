@@ -307,8 +307,6 @@ set tenc=utf8
 
 set noswapfile
 
-nmap <silent> <F8> :call AutoCloseToggle()<CR>
-
 set fileencodings=utf8,cp1251
 
 "vmap ,t cctnwp<Tab>translate<Tab>word<Esc>f";a'<C-R>"'<ESC>
