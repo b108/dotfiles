@@ -68,11 +68,12 @@ Plug 'b108/vim-php-refactoring'
 
 Plug 'danro/rename.vim'
 
-" Emmet Plug {
-    "let g:user_emmet_leader_key='<C-M>'
-    "let g:user_emmet_mode='a'    "enable all function in all mode.
-    "Plug 'mattn/emmet-vim'
-" }
+" JSON {{{
+Plug 'leshill/vim-json'
+if has("autocmd")
+    autocmd BufRead *.json set filetype=json
+endif
+" }}}
 
 " PHP syntax {{{
     Plug 'StanAngeloff/php.vim', { 'for': 'php' }
@@ -467,7 +468,7 @@ if has('path_extra')
 endif
 
 set autoread
-set history=1000
+set history=10000
 
 set display+=lastline
 set scrolloff=1
