@@ -286,7 +286,7 @@ set wildmode=list:longest
 
 "set relativenumber
 
-" Disables arrow keys in normal mode to enforce use of hjkl
+" Disables arrow keys in normal mode to enforce use of hjkl {{{
 nnoremap <up> <nop>
 nnoremap <down> <nop>
 nnoremap <left> <nop>
@@ -295,6 +295,8 @@ inoremap <up> <nop>
 inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
+" }}}
+
 nnoremap j gj
 nnoremap k gk
 
