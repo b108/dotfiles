@@ -276,7 +276,8 @@ let g:CodeCompl_Hotkey = '<C-z>'
 nnoremap p ]p
 nnoremap P ]P
 
-set listchars=tab:▸\ ,eol:¬
+set listchars=tab:▸\ ,trail:·
+set list
 
 " More useful command-line-like tab completion
 set wildmenu
