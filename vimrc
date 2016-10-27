@@ -309,8 +309,6 @@ set noswapfile
 
 set fileencodings=utf8,cp1251
 
-"vmap ,t cctnwp<Tab>translate<Tab>word<Esc>f";a'<C-R>"'<ESC>
-
 au! BufWriteCmd  *.php call PHPsynCHK()
 
 if !exists('*PHPsynCHK')
