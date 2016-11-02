@@ -553,3 +553,5 @@ autocmd! bufwritepost .vimrc source $MYVIMRC
 if filereadable(expand("~/.vimrc.local"))
     source $HOME/.vimrc.local
 endif
+
+autocmd BufNewFile,BufRead *.php setlocal keywordprg=~/scripts/open_php_keyword_doc.sh
