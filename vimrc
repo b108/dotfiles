@@ -24,7 +24,7 @@ Plug 'austintaylor/vim-commaobject'
     Plug 'scrooloose/nerdtree'
     Plug 'Xuyuanp/nerdtree-git-plugin'
 
-    nnoremap <Bs> :<C-u>NERDTreeToggle<CR>
+    nnoremap <Bs> :<C-u>NERDTreeFind<CR>
 
     let NERDTreeQuitOnOpen=1
 " }}}
