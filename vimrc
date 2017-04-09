@@ -97,20 +97,6 @@ if has("autocmd")
 endif
 " }}}
 
-" PHP syntax {{{
-    "Plug 'StanAngeloff/php.vim', { 'for': 'php' }
-
-    "function! PhpSyntaxOverride()
-        "hi! def link phpDocTags  phpDefine
-        "hi! def link phpDocParam phpType
-    "endfunction
-
-    "augroup phpSyntaxOverride
-        "autocmd!
-        "autocmd FileType php call PhpSyntaxOverride()
-    "augroup END
-" }}}
-
 "Tagbar plugin {
     map \t :TagbarToggle<CR>
     let g:tagbar_left = 1
@@ -337,19 +323,6 @@ endfunction
 
 au BufNewFile *.js call NewJsFile()
 
-function! GoPhpUnitError()
-    let makeprg=&makeprg
-    let errorformat=&errorformat
-
-    set makeprg=cat
-    set errorformat=%E%n)\ %.%#,%Z%f:%l,%C%m,%-G%.%#
-
-    make /tmp/phpunit.output
-
-    let &makeprg=makeprg
-    let &errorformat=errorformat
-endfunction
-
 " Automatically create directories if they don't exist
 augroup Mkdir
   autocmd!
@@ -358,8 +331,6 @@ augroup Mkdir
         \ call mkdir(expand("<afile>:p:h"), "p") |
     \ endif
 augroup END
-
-nnoremap <F3> :call GoPhpUnitError()<CR><CR>
 
 let g:ycm_seed_identifiers_with_syntax = 1
 let g:ycm_collect_identifiers_from_tags_files = 1
@@ -380,14 +351,6 @@ let g:UltiSnipsEditSplit="vertical"
 
 let Grep_Skip_Files='*~ tags cscope.out coverage.xml'
 let Grep_Skip_Dirs='cache compressed'
-
-" удаляем двоеточие «:» из списка, иначе в php не ищутся
-" вхождения констант вида self::CONSTANT_NAME
-" setlocal iskeyword-=58
-autocmd BufEnter *.php setlocal iskeyword-=58
-autocmd BufEnter *.php setlocal iskeyword-=$
-
-autocmd BufNewFile,BufRead *.php call matchadd('ColorColumn', '\%81v', 100)
 
 nmap <silent> <Tab> :tabnext<CR>
 
@@ -428,33 +391,6 @@ set wildignore+=*/vendor/*
 
 nnoremap <leader>v :tabnew ~/.vimrc<CR>
 
-autocmd BufNewFile,BufRead *.php setlocal foldmethod=expr foldexpr=PHPFold(v:lnum)
-
-function! PHPFold(lnum)
-  let current = getline(a:lnum)
-
-  if current =~# '\s*}$'
-    let level = indent(a:lnum) / &l:shiftwidth
-    return level > 2 ? '=' : '<' . (level + 1)
-  elseif current =~# '^\s*\('
-                 \ . '\(\(final\|private\|protected\|public\|static\)\s\)*function'
-                 \ . '\|\(abstract\s\)\?class'
-                 \ . '\|interface'
-                 \ . '\|namespace'
-                 \ . '\|trait'
-                 \ . '\)[^;]*$'
-    let level = indent(a:lnum) / &l:shiftwidth
-    return level > 2 ? '=' : '>' . (level + 1)
-  else
-    return '='
-  endif
-endfunction
-
-" Сокращения внутри phpunit-файлов и файлов интерфейсов {
-autocmd BufNewFile,BufRead *Test.php set ft=php.phpunit
-autocmd BufNewFile,BufRead *Interface.php set ft=php.php_interface
-" }
-
 nnoremap <leader>f :Ack! '\b<C-R>=expand("<cword>")<CR>\b'<CR>
 
 " Search matches are always in center {{{
@@ -467,33 +403,13 @@ nnoremap <leader>f :Ack! '\b<C-R>=expand("<cword>")<CR>\b'<CR>
     nnoremap g# g#zz
 " }}}
 
-" Go to file of PHP class under cursor {{{
-function! PHPGoFile()
-    let old_iskeyword_option = &iskeyword
-    set iskeyword+=\
-    let className = expand("<cword>")
-    let fileOfClass = substitute(substitute(className, "\\", "/", "g"), "^/", "", "") . '.php'
-    execute "set iskeyword=" . old_iskeyword_option
-
-    let existsBufferNumberOfFile = bufnr(fileOfClass)
-
-    if existsBufferNumberOfFile > 0
-        exe existsBufferNumberOfFile . "buffer"
-    elseif filereadable(fileOfClass)
-        exe "e " . fnameescape(fileOfClass)
-    else
-        exe "normal! gf"
-    endif
-endfunction
-
-autocmd BufNewFile,BufRead *.php nnoremap <buffer> gf :call<Space>PHPGoFile()<CR>
-" }}}
-
 autocmd! bufwritepost .vimrc source $MYVIMRC
 
 if filereadable(expand("~/.vimrc.local"))
     source $HOME/.vimrc.local
 endif
+
+source $HOME/.vim/php.vim
 
 autocmd BufNewFile,BufRead *.php setlocal keywordprg=~/scripts/open_php_keyword_doc.sh
 
