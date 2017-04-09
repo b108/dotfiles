@@ -198,14 +198,13 @@ set statusline+=%#GitBranchSl#%{MyGitBranchInfo()}%##
 
 set wrap
 set linebreak
+set visualbell
 
-" <!-- Раскладка
+" Раскладка {{{
 set keymap=russian-jcukenwin
 set iminsert=0
 set imsearch=0
 highlight lCursor ctermfg=NONE ctermbg=Cyan
-
-set visualbell
 
 function! MyKeyMapHighlight()
     if &iminsert == 0
@@ -223,36 +222,12 @@ cmap <silent> <C-F> <C-^>
 imap <silent> <C-F> <C-^>X<Esc>:call MyKeyMapHighlight()<CR>a<C-H>
 nmap <silent> <C-F> a<C-^><Esc>:call MyKeyMapHighlight()<CR>
 vmap <silent> <C-F> <Esc>a<C-^><Esc>:call MyKeyMapHighlight()<CR>gv
-
-" -->
+" }}}
 
 set autoindent
 set smartindent
 
 set splitright
-
-"imap {<CR> {<CR>}<Esc>O
-
-imap <F2> <Esc>:w<CR>a
-nnoremap <F2> :w<CR>
-
-imap <F1> <Esc>:set<Space>nu!<CR>a
-nmap <F1> :set<Space>nu!<CR>
-
-imap <F5> <C-^>
-
-fun! <SID>WindowWidth()
-    if winwidth(0) > 90
-        setlocal foldcolumn=1
-        setlocal number
-    else
-        setlocal nonumber
-        setlocal foldcolumn=0
-    endif
-endfun
-
-" Ïðîáåë â íîðìàëüíîì ðåæèìå ïåðåëèñòûâàåò ñòðàíèöû
-nmap <Space> <PageDown>
 
 " < & > - äåëàåì îòñòóïû äëÿ áëîêîâ
 vmap < <gv
