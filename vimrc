@@ -381,15 +381,12 @@ let g:UltiSnipsEditSplit="vertical"
 let Grep_Skip_Files='*~ tags cscope.out coverage.xml'
 let Grep_Skip_Dirs='cache compressed'
 
-nnoremap ,t :sp tests/php-unit/<C-R>=expand("%:r")<CR>Test.php<CR>
-
 " удаляем двоеточие «:» из списка, иначе в php не ищутся
 " вхождения констант вида self::CONSTANT_NAME
 " setlocal iskeyword-=58
 autocmd BufEnter *.php setlocal iskeyword-=58
 autocmd BufEnter *.php setlocal iskeyword-=$
 
-autocmd BufNewFile,BufRead *.yml setlocal iskeyword+=.
 autocmd BufNewFile,BufRead *.php call matchadd('ColorColumn', '\%81v', 100)
 
 nmap <silent> <Tab> :tabnext<CR>
