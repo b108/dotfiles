@@ -297,7 +297,7 @@ set noswapfile
 set fileencodings=utf8,cp1251
 
 if has("autocmd")
-    autocmd BufRead *.sql set filetype=mysql      
+    autocmd BufRead *.sql set filetype=mysql
     autocmd BufRead *.html.twig set filetype=htmljinja
 endif
 
@@ -309,12 +309,6 @@ let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = {
     \ 'dir': 'extra'
     \ }
-
-
-iabbr functoin function
-
-"autocmd InsertEnter *.php set foldmethod=syntax
-"autocmd InsertLeave *.php set foldmethod=syntax
 
 "Взято из https://github.com/pepellou/vim-tricks: {{{{
 
