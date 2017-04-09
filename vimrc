@@ -4,6 +4,7 @@ set nocompatible
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'ervandew/supertab'
 Plug 'sjl/badwolf'
 Plug 'vim-scripts/IndexedSearch'
 
@@ -11,6 +12,12 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 Plug 'austintaylor/vim-commaobject'
+
+" vim-hardtime {{{
+Plug 'takac/vim-hardtime'
+let g:hardtime_default_on = 1
+let g:hardtime_maxcount = 2
+" }}}
 
 " Ack {{{
     if executable('ag')
@@ -42,7 +49,15 @@ Plug 'ctrlpvim/ctrlp.vim'
 
 Plug 'dyng/ctrlsf.vim'
 
+" Syntastic {{{
 Plug 'scrooloose/syntastic'
+let g:syntastic_php_checkers = ['php', 'phpmd']
+let g:syntastic_mod_map = {
+       \ 'mode': 'passive',
+       \ 'active_filetypes': ['php'] }
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+" }}}
 
 "Plug 'joonty/vdebug'
 
@@ -56,15 +71,22 @@ Plug 'joonty/vim-phpunitqf'
 " }}}
 
 "Plug 'vim-scripts/grep.vim'
-Plug 'shawncplus/phpcomplete.vim'
+"Plug 'shawncplus/phpcomplete.vim'
+
+" neocomplite {{{
 Plug 'Shougo/neocomplete.vim'
+let g:neocomplete#enable_at_startup = 1
+" }}}
+
+Plug 'Konfekt/FastFold'
+
 Plug 'tpope/vim-endwise'
 Plug 'SirVer/ultisnips'
 
 "Plug 'adoy/vim-php-refactoring-toolbox'
 Plug 'b108/vim-php-refactoring'
 
-" Plug 'arnaud-lb/vim-php-namespace'
+Plug 'arnaud-lb/vim-php-namespace'
 
 Plug 'danro/rename.vim'
 
@@ -76,17 +98,17 @@ endif
 " }}}
 
 " PHP syntax {{{
-    Plug 'StanAngeloff/php.vim', { 'for': 'php' }
+    "Plug 'StanAngeloff/php.vim', { 'for': 'php' }
 
-    function! PhpSyntaxOverride()
-        hi! def link phpDocTags  phpDefine
-        hi! def link phpDocParam phpType
-    endfunction
+    "function! PhpSyntaxOverride()
+        "hi! def link phpDocTags  phpDefine
+        "hi! def link phpDocParam phpType
+    "endfunction
 
-    augroup phpSyntaxOverride
-        autocmd!
-        autocmd FileType php call PhpSyntaxOverride()
-    augroup END
+    "augroup phpSyntaxOverride
+        "autocmd!
+        "autocmd FileType php call PhpSyntaxOverride()
+    "augroup END
 " }}}
 
 "Tagbar plugin {
@@ -241,29 +263,11 @@ set completeopt+=longest
 
 nnoremap \w  :w<CR>
 
-function! QuickMake()
-    map <C-C> :make<CR><CR><CR>:cw<CR>
-endfun
-
 set tabstop=4 shiftwidth=4 smarttab expandtab softtabstop=4
 
-function! PythonFile()
-    set autoindent
-endfun
-
-function! CFile()
-    exe QuickMake()
-endfun
-
-function! Makefile()
-    setlocal noexpandtab
-endfun
-
-au Filetype python exe PythonFile()
-au Filetype c exe CFile()
 au BufNewFile,BufRead *.map         setf map
 
-au FileType make exe Makefile()
+au FileType make setlocal noexpandtab
 
 syntax on
 highlight Folded ctermbg=4 ctermfg=8 term=bold
@@ -271,8 +275,6 @@ highlight Folded ctermbg=4 ctermfg=8 term=bold
 nnoremap <silent> <F4> :CtrlPBuffer<CR>
 nnoremap <F5> :bp<CR>
 nnoremap <F6> :bn<CR>
-
-let g:CodeCompl_Hotkey = '<C-z>'
 
 nnoremap p ]p
 nnoremap P ]P
@@ -311,36 +313,6 @@ set tenc=utf8
 set noswapfile
 
 set fileencodings=utf8,cp1251
-
-au! BufWriteCmd  *.php call PHPsynCHK()
-
-if !exists('*PHPsynCHK')
-  function! PHPsynCHK()
-    "exe SyntasticCheck()
-    ccl
-    let winnum = winnr() " get current window number
-    let linenum = line('.')
-    let colnum = col('.')
-    "silent execute "%!php -l -f /dev/stdin | sed 's@\\/dev\\/stdin@".bufname("%")."@g' >/tmp/vimerr; cat"
-    let tmp_file = '/tmp/vim_tmp.php'
-    silent execute "w! " . tmp_file
-    silent execute "!php -l -f '" . tmp_file . "' 2>&1 | sed 's\\#" . tmp_file . "\\#".bufname("%")."\\#g' >/tmp/vimerr"
-    set errorformat=%m\ in\ %f\ on\ line\ %l
-    silent cf /tmp/vimerr
-    cw " open the error window if it contains error
-    " return to the window with cursor set on the line of the first error (if any)
-    execute winnum . "wincmd w"
-    "silent undo
-    silent cf
-    if 1 == len(getqflist())
-      call s:Mkdir()
-      w
-      call cursor(linenum, colnum)
-    endif
-  endfunction
-endif
-
-set errorformat=%m\ in\ %f\ on\ line\ %l
 
 if has("autocmd")
     autocmd BufRead *.sql set filetype=mysql      
@@ -392,15 +364,6 @@ endfunction
 au BufNewFile *.js call NewJsFile()
 au BufNewFile * set fileencoding=utf-8
 
-function! s:Mkdir()
-  let dir = expand('%:p:h')
-
-  if !isdirectory(dir)
-    call mkdir(dir, 'p')
-    echo 'Created non-existing directory: '.dir
-  endif
-endfunction
-
 function! GoPhpUnitError()
     let makeprg=&makeprg
     let errorformat=&errorformat
@@ -413,6 +376,15 @@ function! GoPhpUnitError()
     let &makeprg=makeprg
     let &errorformat=errorformat
 endfunction
+
+" Automatically create directories if they don't exist
+augroup Mkdir
+  autocmd!
+  autocmd BufWritePre *
+    \ if !isdirectory(expand("<afile>:p:h")) |
+        \ call mkdir(expand("<afile>:p:h"), "p") |
+    \ endif
+augroup END
 
 nnoremap <F3> :call GoPhpUnitError()<CR><CR>
 
@@ -442,6 +414,7 @@ nnoremap ,t :sp tests/php-unit/<C-R>=expand("%:r")<CR>Test.php<CR>
 " вхождения констант вида self::CONSTANT_NAME
 " setlocal iskeyword-=58
 autocmd BufEnter *.php setlocal iskeyword-=58
+autocmd BufEnter *.php setlocal iskeyword-=$
 
 autocmd BufNewFile,BufRead *.yml setlocal iskeyword+=.
 autocmd BufNewFile,BufRead *.php call matchadd('ColorColumn', '\%81v', 100)
@@ -512,9 +485,7 @@ autocmd BufNewFile,BufRead *Test.php set ft=php.phpunit
 autocmd BufNewFile,BufRead *Interface.php set ft=php.php_interface
 " }
 
-let g:syntastic_php_checkers = ['php', 'phpmd']
-
-nnoremap <leader>f :execute "Ack! " . expand("<cword>")<CR>
+nnoremap <leader>f :Ack! '\b<C-R>=expand("<cword>")<CR>\b'<CR>
 
 " Search matches are always in center {{{
 " from https://github.com/miripiruni/vimi/blob/master/.vimrc
@@ -555,3 +526,5 @@ if filereadable(expand("~/.vimrc.local"))
 endif
 
 autocmd BufNewFile,BufRead *.php setlocal keywordprg=~/scripts/open_php_keyword_doc.sh
+
+iabbr -- —
