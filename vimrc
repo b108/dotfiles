@@ -180,6 +180,13 @@ endfunction
 
 set laststatus=2
 set statusline=\ %f\ %m
+
+" Syntastic status {{{
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+" }}}
+
 set statusline+=%=
 set statusline+=\"%F\"
 set statusline+=\ →\ %{&fileencoding} "кодировка, в которой файл сохраняется на диск
@@ -345,8 +352,6 @@ au BufWinEnter * silent! loadview
 
 " }}}}
 
-nnoremap ,m :MarksBrowser<CR>
-
 function! NewJsFile()
     let fn=expand("%")
     if match(fn, "\\<models\\|views\\>/") >= 0
@@ -362,7 +367,6 @@ function! NewJsFile()
 endfunction
 
 au BufNewFile *.js call NewJsFile()
-au BufNewFile * set fileencoding=utf-8
 
 function! GoPhpUnitError()
     let makeprg=&makeprg
