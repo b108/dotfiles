@@ -13,18 +13,14 @@ Plug 'junegunn/fzf.vim'
 
 Plug 'austintaylor/vim-commaobject'
 
+let g:grepper = {}
+let g:grepper.ag = {'grepprg': 'ag -i --'}
+Plug 'mhinz/vim-grepper'
+
 " vim-hardtime {{{
 Plug 'takac/vim-hardtime'
 let g:hardtime_default_on = 1
 let g:hardtime_maxcount = 2
-" }}}
-
-" Ack {{{
-    if executable('ag')
-        let g:ackprg = 'ag -i'
-    endif
-
-    Plug 'mileszs/ack.vim'
 " }}}
 
 " NerdTree {{{
@@ -74,6 +70,7 @@ Plug 'joonty/vim-phpunitqf'
 "Plug 'shawncplus/phpcomplete.vim'
 
 " neocomplite {{{
+Plug 'Shougo/vimproc'
 Plug 'Shougo/neocomplete.vim'
 let g:neocomplete#enable_at_startup = 1
 " }}}
@@ -155,15 +152,6 @@ set showcmd
 " когда переключаешься между ними
 set hidden
 
-"Используется плагин https://github.com/vim-scripts/Git-Branch-Info
-function! MyGitBranchInfo()
-    let l:branch=GitBranchInfoTokens()[0]
-    if l:branch == ""
-        return ""
-    else
-        return " " . l:branch . " "
-endfunction
-
 set laststatus=2
 set statusline=\ %f\ %m
 
@@ -180,7 +168,7 @@ set statusline+=\ %r
 set statusline+=\ %#LineNrSl#\ %l\ %##\ of\ %L\ (%p%%) "номер текущей строки, общее количество строк, % от файла
 set statusline+=,\ col\ %c\ (0x%04B)
 set statusline+=\ %#FileTypeSl#\ %{strlen(&filetype)?&filetype:'none'}\ %##
-set statusline+=%#GitBranchSl#%{MyGitBranchInfo()}%##
+set statusline+=%#GitBranchSl#%{fugitive#head()}%##
 
 set wrap
 set linebreak
@@ -391,7 +379,7 @@ set wildignore+=*/vendor/*
 
 nnoremap <leader>v :tabnew ~/.vimrc<CR>
 
-nnoremap <leader>f :Ack! '\b<C-R>=expand("<cword>")<CR>\b'<CR>
+nnoremap <leader>f :GrepperAg '\b<C-R>=expand("<cword>")<CR>\b'<CR>
 
 " Search matches are always in center {{{
 " from https://github.com/miripiruni/vimi/blob/master/.vimrc
@@ -408,9 +396,5 @@ autocmd! bufwritepost .vimrc source $MYVIMRC
 if filereadable(expand("~/.vimrc.local"))
     source $HOME/.vimrc.local
 endif
-
-source $HOME/.vim/php.vim
-
-autocmd BufNewFile,BufRead *.php setlocal keywordprg=~/scripts/open_php_keyword_doc.sh
 
 iabbr -- —
