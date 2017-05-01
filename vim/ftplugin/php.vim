@@ -17,16 +17,16 @@ function! PHPGoFile()
     endif
 endfunction
 
-autocmd BufNewFile,BufRead *.php nnoremap <buffer> gf :call<Space>PHPGoFile()<CR>
+nnoremap <buffer> gf :call<Space>PHPGoFile()<CR>
 " }}}
 
 " Сокращения внутри phpunit-файлов и файлов интерфейсов {{{
-autocmd BufNewFile,BufRead *Test.php set ft=php.phpunit
-autocmd BufNewFile,BufRead *Interface.php set ft=php.php_interface
+autocmd BufNewFile,BufReadPre *Test.php set ft=php.phpunit
+autocmd BufNewFile,BufReadPre *Interface.php set ft=php.php_interface
 " }}}
 
 " Folding {{{
-autocmd BufNewFile,BufRead *.php setlocal foldmethod=expr foldexpr=PHPFold(v:lnum)
+setlocal foldmethod=expr foldexpr=PHPFold(v:lnum)
 
 function! PHPFold(lnum)
   let current = getline(a:lnum)
@@ -51,8 +51,6 @@ endfunction
 
 " удаляем двоеточие «:» из списка, иначе в php не ищутся
 " вхождения констант вида self::CONSTANT_NAME
-" setlocal iskeyword-=58
-autocmd BufEnter *.php setlocal iskeyword-=58
-autocmd BufEnter *.php setlocal iskeyword-=$
+setlocal iskeyword-=58,$
 
-autocmd BufNewFile,BufRead *.php call matchadd('ColorColumn', '\%81v', 100)
+call matchadd('ColorColumn', '\%81v', 100)
