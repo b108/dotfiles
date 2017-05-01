@@ -397,4 +397,8 @@ if filereadable(expand("~/.vimrc.local"))
     source $HOME/.vimrc.local
 endif
 
+if filereadable(expand("./.vimrc"))
+    source ./.vimrc
+endif
+
 iabbr -- —
