@@ -13,6 +13,9 @@ Plug 'junegunn/fzf.vim'
 
 Plug 'austintaylor/vim-commaobject'
 
+Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-function'
+
 let g:grepper = {}
 let g:grepper.ag = {'grepprg': 'ag -i --'}
 Plug 'mhinz/vim-grepper'
@@ -402,3 +405,5 @@ if filereadable(expand("./.vimrc"))
 endif
 
 iabbr -- —
+
+cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h') . '/' : '%%'
