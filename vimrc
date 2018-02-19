@@ -107,6 +107,9 @@ endif
 Plug 'vim-scripts/Git-Branch-Info'
 Plug 'tpope/vim-fugitive'
 
+Plug 'junegunn/vim-easy-align'
+xmap ga <Plug>(EasyAlign)
+
 call plug#end()
 
 " включить загрузку плагинов по типам файлов
