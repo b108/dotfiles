@@ -64,6 +64,8 @@ Plug 'benmills/vimux'
 
 Plug 'joonty/vim-phpunitqf'
 
+Plug 'embear/vim-localvimrc'
+
 " buffergator {{{
     let g:buffergator_suppress_keymaps=1
     Plug 'jeetsukumaran/vim-buffergator'
@@ -398,10 +400,6 @@ autocmd! bufwritepost .vimrc source $MYVIMRC
 
 if filereadable(expand("~/.vimrc.local"))
     source $HOME/.vimrc.local
-endif
-
-if filereadable(expand("./.vimrc"))
-    source ./.vimrc
 endif
 
 iabbr -- —
