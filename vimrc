@@ -5,7 +5,8 @@ set nocompatible
 call plug#begin('~/.vim/plugged')
 
 Plug 'ervandew/supertab'
-Plug 'sjl/badwolf'
+
+" shows 'Nth match out of M' at every search (index of match+total # matches)
 Plug 'vim-scripts/IndexedSearch'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -13,11 +14,8 @@ Plug 'junegunn/fzf.vim'
 
 Plug 'austintaylor/vim-commaobject'
 
-Plug 'kana/vim-textobj-user'
-Plug 'kana/vim-textobj-function'
-
 let g:grepper = {}
-let g:grepper.ag = {'grepprg': 'ag -i --'}
+let g:grepper.ag = {'grepprg': 'ag -i --vimgrep --'}
 Plug 'mhinz/vim-grepper'
 
 " vim-hardtime {{{
@@ -35,10 +33,13 @@ let g:hardtime_maxcount = 2
     let NERDTreeQuitOnOpen=1
 " }}}
 
-" Plug 'kristijanhusak/vim-multiple-cursors'
-
 Plug 'evidens/vim-twig'
 Plug 'valloric/MatchTagAlways'
+
+Plug 'tpope/vim-fireplace'
+Plug 'vim-scripts/paredit.vim'
+
+Plug 'posva/vim-vue'
 
 Plug 'jiangmiao/auto-pairs'
 Plug 'bling/vim-bufferline'
